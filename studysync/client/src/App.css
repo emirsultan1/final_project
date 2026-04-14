@@ -1,0 +1,545 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover {
+  color: #4f46e5;
+}
+
+.navbar-user {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.btn-logout {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.btn-logout:hover {
+  background-color: #f0f0f0;
+}
+
+/* Auth Pages */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.auth-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card h2 {
+  margin-bottom: 24px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #4338ca;
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.auth-switch a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #dc2626;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+/* Dashboard */
+.dashboard h1 {
+  margin-bottom: 8px;
+}
+
+.dashboard > p {
+  color: #888;
+  margin-bottom: 24px;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.card p {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Courses Page */
+.courses-page h1 {
+  margin-bottom: 20px;
+}
+
+.course-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.course-form input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.course-form input:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+.color-picker {
+  display: flex;
+  gap: 8px;
+}
+
+.color-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color-dot:hover {
+  transform: scale(1.15);
+}
+
+.color-dot.active {
+  border-color: #333;
+  transform: scale(1.15);
+}
+
+.course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.course-item {
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.course-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.course-name {
+  flex: 1;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.course-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.course-edit {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.course-edit input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.btn-small {
+  padding: 5px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.btn-small:hover {
+  background: #f5f5f5;
+}
+
+.btn-danger {
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.btn-danger:hover {
+  background: #fef2f2;
+}
+
+.btn-cancel {
+  color: #888;
+}
+
+.empty-state {
+  text-align: center;
+  color: #888;
+  padding: 40px;
+  font-size: 1rem;
+}
+
+/* Tasks Page */
+.tasks-page h1 {
+  margin-bottom: 20px;
+}
+
+.task-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.task-form input,
+.task-form select {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.task-form input[type="text"] {
+  flex: 1;
+  min-width: 180px;
+}
+
+.task-form select {
+  min-width: 130px;
+}
+
+.task-form input:focus,
+.task-form select:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+.task-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #555;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  background: #f5f5f5;
+}
+
+.filter-btn.active {
+  background: #4f46e5;
+  color: #fff;
+  border-color: #4f46e5;
+}
+
+.filter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-item {
+  background: #fff;
+  padding: 14px 18px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.task-item.task-completed {
+  opacity: 0.6;
+}
+
+.task-item.task-overdue {
+  border-left: 3px solid #dc2626;
+}
+
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #4f46e5;
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-title {
+  font-weight: 500;
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.task-completed .task-title {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.task-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.task-course {
+  font-weight: 600;
+}
+
+.task-deadline {
+  color: #888;
+}
+
+.overdue-text {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.task-priority {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.priority-high {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.priority-medium {
+  background: #fefce8;
+  color: #ca8a04;
+}
+
+.priority-low {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 20px;
+  }
+
+  .navbar-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .auth-card {
+    margin: 20px;
+    padding: 24px;
+  }
+
+  .course-form {
+    flex-direction: column;
+  }
+
+  .course-form input {
+    width: 100%;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  .task-form input,
+  .task-form select {
+    width: 100%;
+  }
+}
