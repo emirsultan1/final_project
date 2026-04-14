@@ -19,7 +19,6 @@ const Navbar = () => {
             <Link to="/">Dashboard</Link>
             <Link to="/courses">Courses</Link>
             <Link to="/tasks">Tasks</Link>
-            <Link to="/timer">Timer</Link>
             <span className="navbar-user">Hi, {user.name}</span>
             <button onClick={handleLogout} className="btn-logout">Logout</button>
           </>

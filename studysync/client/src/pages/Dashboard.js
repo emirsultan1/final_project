@@ -1,24 +1,72 @@
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import API from '../utils/api';
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const [stats, setStats] = useState({
+    courses: 0,
+    totalTasks: 0,
+    pending: 0,
+    overdue: 0,
+    completed: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const [coursesRes, tasksRes] = await Promise.all([
+          API.get('/courses'),
+          API.get('/tasks'),
+        ]);
+
+        const tasks = tasksRes.data;
+        const now = new Date();
+
+        setStats({
+          courses: coursesRes.data.length,
+          totalTasks: tasks.length,
+          pending: tasks.filter((t) => !t.completed).length,
+          overdue: tasks.filter((t) => !t.completed && new Date(t.deadline) < now).length,
+          completed: tasks.filter((t) => t.completed).length,
+        });
+      } catch (err) {
+        console.error('Failed to load dashboard stats', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  if (loading) {
+    return <div className="dashboard"><p>Loading...</p></div>;
+  }
 
   return (
     <div className="dashboard">
       <h1>Welcome, {user?.name}!</h1>
-      <p>Your StudySync dashboard. We'll add charts and stats here soon.</p>
+      <p>Here's an overview of your academic workload.</p>
       <div className="dashboard-cards">
         <div className="card">
           <h3>Courses</h3>
-          <p>0 courses</p>
+          <p>{stats.courses}</p>
         </div>
         <div className="card">
-          <h3>Tasks</h3>
-          <p>0 pending</p>
+          <h3>Pending Tasks</h3>
+          <p>{stats.pending}</p>
         </div>
         <div className="card">
-          <h3>Study time</h3>
-          <p>0 hours this week</p>
+          <h3>Overdue</h3>
+          <p style={{ color: stats.overdue > 0 ? '#dc2626' : 'inherit' }}>
+            {stats.overdue}
+          </p>
+        </div>
+        <div className="card">
+          <h3>Completed</h3>
+          <p>{stats.completed}</p>
         </div>
       </div>
     </div>
