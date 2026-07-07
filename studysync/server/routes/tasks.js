@@ -1,9 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const { getTasks, createTask, updateTask, deleteTask } = require('../controllers/taskController');
 const { protect } = require('../middleware/auth');
+const {
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+  addSubtask,
+  toggleSubtask,
+  deleteSubtask,
+} = require('../controllers/taskController');
 
-router.route('/').get(protect, getTasks).post(protect, createTask);
-router.route('/:id').put(protect, updateTask).delete(protect, deleteTask);
+router.use(protect);
+
+router.route('/')
+  .get(getTasks)
+  .post(createTask);
+
+router.route('/:id')
+  .put(updateTask)
+  .delete(deleteTask);
+
+// Subtask routes
+router.post('/:id/subtasks', addSubtask);
+router.put('/:id/subtasks/:subtaskId', toggleSubtask);
+router.delete('/:id/subtasks/:subtaskId', deleteSubtask);
 
 module.exports = router;

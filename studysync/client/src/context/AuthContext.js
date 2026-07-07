@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check if user is already logged in on app load
   useEffect(() => {
     const loadUser = async () => {
       const token = localStorage.getItem('token');
@@ -45,8 +44,19 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  // Re-fetch the current user (used after Google OAuth completes)
+  const refreshUser = async () => {
+    try {
+      const res = await API.get('/auth/me');
+      setUser(res.data);
+      return res.data;
+    } catch (err) {
+      console.error('Failed to refresh user', err);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, register, logout, loading, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );

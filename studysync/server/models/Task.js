@@ -1,5 +1,19 @@
 const mongoose = require('mongoose');
 
+const subtaskSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+}, {
+  timestamps: true,
+});
+
 const taskSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -29,6 +43,11 @@ const taskSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  googleEventId: {
+    type: String,
+    default: null,
+  },
+  subtasks: [subtaskSchema],
 }, {
   timestamps: true,
 });

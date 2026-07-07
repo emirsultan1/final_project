@@ -10,15 +10,18 @@ const Dashboard = () => {
     pending: 0,
     overdue: 0,
     completed: 0,
+    todayMinutes: 0,
+    totalSessions: 0,
   });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [coursesRes, tasksRes] = await Promise.all([
+        const [coursesRes, tasksRes, sessionStatsRes] = await Promise.all([
           API.get('/courses'),
           API.get('/tasks'),
+          API.get('/sessions/stats'),
         ]);
 
         const tasks = tasksRes.data;
@@ -30,6 +33,8 @@ const Dashboard = () => {
           pending: tasks.filter((t) => !t.completed).length,
           overdue: tasks.filter((t) => !t.completed && new Date(t.deadline) < now).length,
           completed: tasks.filter((t) => t.completed).length,
+          todayMinutes: sessionStatsRes.data.todayMinutes,
+          totalSessions: sessionStatsRes.data.totalSessions,
         });
       } catch (err) {
         console.error('Failed to load dashboard stats', err);
@@ -67,6 +72,14 @@ const Dashboard = () => {
         <div className="card">
           <h3>Completed</h3>
           <p>{stats.completed}</p>
+        </div>
+        <div className="card">
+          <h3>Today's Focus</h3>
+          <p>{stats.todayMinutes} min</p>
+        </div>
+        <div className="card">
+          <h3>Study Sessions</h3>
+          <p>{stats.totalSessions}</p>
         </div>
       </div>
     </div>
