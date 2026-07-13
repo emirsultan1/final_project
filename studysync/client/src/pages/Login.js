@@ -24,12 +24,13 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-card">
         <h2>Login to StudySync</h2>
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message" data-testid="login-error">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email</label>
             <input
               type="email"
+              data-testid="login-email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
@@ -40,13 +41,14 @@ const Login = () => {
             <label>Password</label>
             <input
               type="password"
+              data-testid="login-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               required
             />
           </div>
-          <button type="submit" className="btn-primary">Login</button>
+          <button type="submit" className="btn-primary" data-testid="login-submit">Login</button>
         </form>
         <p className="auth-switch">
           Don't have an account? <Link to="/register">Register</Link>

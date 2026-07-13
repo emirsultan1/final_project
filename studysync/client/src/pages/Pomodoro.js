@@ -155,6 +155,7 @@ const Pomodoro = () => {
           <button
             key={key}
             className={`mode-btn ${mode === key ? 'active' : ''}`}
+            data-testid={`mode-${key}`}
             onClick={() => setMode(key)}
           >
             {MODES[key].label}
@@ -193,6 +194,7 @@ const Pomodoro = () => {
             fontSize="48"
             fontWeight="700"
             fill="#18181b"
+            data-testid="timer-display"
             style={{ letterSpacing: '-0.02em' }}
           >
             {formatTime(secondsLeft)}
@@ -228,15 +230,15 @@ const Pomodoro = () => {
 
       <div className="pomodoro-controls">
         {!isRunning ? (
-          <button onClick={handleStart} className="btn-primary" style={{ width: 'auto', padding: '12px 32px' }}>
+          <button onClick={handleStart} className="btn-primary" data-testid="timer-start" style={{ width: 'auto', padding: '12px 32px' }}>
             Start
           </button>
         ) : (
-          <button onClick={handlePause} className="btn-primary" style={{ width: 'auto', padding: '12px 32px', background: '#6b7280' }}>
+          <button onClick={handlePause} className="btn-primary" data-testid="timer-pause" style={{ width: 'auto', padding: '12px 32px', background: '#6b7280' }}>
             Pause
           </button>
         )}
-        <button onClick={handleReset} className="btn-small" style={{ padding: '12px 24px' }}>
+        <button onClick={handleReset} className="btn-small" data-testid="timer-reset" style={{ padding: '12px 24px' }}>
           Reset
         </button>
       </div>
